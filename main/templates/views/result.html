@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Price Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .result {
+            background-color: #e9f7ef;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .details {
+            margin-top: 20px;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Water Quality Prediction Result</h1>
+        <div class="result">
+            <p>The prediction is: <span class="">{{ prediction }}</span></p>
+        </div>
+        {% comment %} <div class="details">
+            <h2>Input Details:</h2>
+            <p><strong>Location:</strong> {{ input.location }}</p>
+            <p><strong>Commodity:</strong> {{ input.commodity }}</p>
+            <p><strong>Temperature:</strong> {{ input.temperature }}°C</p>
+            <p><strong>Rainfall:</strong> {{ input.rainfall }} mm</p>
+            <p><strong>Humidity:</strong> {{ input.humidity }}%</p>
+        </div> {% endcomment %}
+        <a href="{% url 'predict' %}" class="back-link" style="background: green; border-radius: 12px 14px; color: white; padding: 10px 20px; text-decoration: none; display: inline-block;">Make Another Prediction</a>
+
+    </div>
+
+    <div class="container">
+        <h1>Water Quality Prediction Result</h1>
+        <div class="result">
+            <p>The prediction is: <span class="">{{ prediction }}</span></p>
+        </div>
+        <!-- list.html -->
+        <h2>Water Quality Samples</h2>
+        <ul>
+            {% for sample in samples %}
+            <li>Sample {{ sample.id }}: {{ sample.Water_Quality_Parameter }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'predict' %}" class="back-link">Make Another Prediction</a>
+    </div>
+</body>
+</html>

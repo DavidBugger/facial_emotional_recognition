@@ -1,0 +1,256 @@
+{% load static %} {% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  data-nav-layout="vertical"
+  data-vertical-style="overlay"
+  class="light"
+  data-header-styles="light"
+  data-menu-styles="light"
+  data-toggled="close"
+>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <head>
+    <!-- META DATA -->
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Dev Dave Technologies" />
+    <meta name="Description" content="Food Price Prediction" />
+    <meta name="keywords" content="python, tailwind, prediction" />
+    {% block title %}
+    <!-- TITLE -->
+    <title>Predict | Emotions</title>
+    {% endblock %}
+    <!-- FAVICON -->
+    <link
+      rel="icon"
+      href="https://php.spruko.com/tailwind/ynex/ynex/assets/images/brand-logos/favicon.ico"
+      type="image/x-icon"
+    />
+    <!-- ICONS CSS -->
+    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" />
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <!-- MAIN JS -->
+    <script src="{% static 'assets/js/authentication-main.js'%}"></script>
+    <!-- SWIPER CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/libs/swiper/swiper-bundle.min.css'%}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      body {
+        background: url("{% static "image/water/w6.jpg" %}") no-repeat center
+          center;
+        background-size: cover;
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+        z-index: -1; /* Ensure the layer is behind other content */
+      }
+
+      #captureBtn {
+        background: linear-gradient(
+          to right,
+          #4caf50,
+          #2e7d32
+        ); /* Gradient green */
+        border: none;
+        border-radius: 14px 16px;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      #captureBtn:hover {
+        background: linear-gradient(
+          to right,
+          #66bb6a,
+          #388e3c
+        ); /* Lighter green on hover */
+        transform: scale(1.05); /* Slight zoom effect */
+      }
+
+      video,
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <br />
+    <br />
+    <br />
+
+    <div class="container mt-">
+      <div class="xl:col-span-4 col-span-12 mt-8">
+        <div class="box terms-box">
+          <div class="box-header justify-between">
+            <div class="box-title">Facial Emotional Recognition Prediction</div>
+            <a
+              aria-label="anchor"
+              href="javascript:void(0);"
+              class="terms-fullscreen"
+            >
+              <i class="ri-fullscreen-line"></i>
+            </a>
+          </div>
+          <div class="box-body">
+            <h1>Live Emotion Detection</h1>
+            <video id="video" autoplay></video>
+            <div style="position: relative; width: 840px; height: 480px;">
+              <video id="video" autoplay></video>
+              <canvas id="canvas"></canvas>
+            </div>
+            <button
+              id="captureBtn"
+              style="background: green; border-radius: 14px 16px; color: white"
+            >
+              Capture & Detect
+            </button>
+            <p id="emotionResult"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas");
+      const context = canvas.getContext("2d");
+      const captureBtn = $("#captureBtn"); // Use jQuery to select the button
+      const emotionResult = document.getElementById("emotionResult");
+
+      // Helper function to get the CSRF token from cookies
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + "=")) {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+
+      // Access webcam
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((err) => {
+          console.error("Error accessing webcam:", err);
+          emotionResult.innerText =
+            "Error accessing webcam. Please check your device.";
+        });
+
+      // Capture image from video and send to Django backend
+      captureBtn.on("click", () => {
+        // Change button text to "Detecting..."
+        captureBtn.text("Detecting...");
+        captureBtn.prop("disabled", true); // Disable the button to prevent multiple clicks
+
+        // Ensure canvas matches video dimensions
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Make canvas visible for debugging
+        canvas.style.display = "block";
+
+        // Convert canvas image to Blob
+        canvas.toBlob((blob) => {
+          const formData = new FormData();
+          formData.append("image", blob, "capture.jpg");
+
+          fetch("/detect/", {
+            method: "POST",
+            body: formData,
+            headers: {
+              "X-CSRFToken": getCookie("csrftoken"), // Include CSRF token
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Response from backend:", data); // Debugging
+              if (data.emotion) {
+                emotionResult.innerText = `Detected Emotion: ${data.emotion}`;
+                toastr.success(`Detected Emotion: ${data.emotion}`);
+
+                // Draw green box around the detected face
+                if (data.face_coordinates) {
+                  const { x, y, w, h } = data.face_coordinates;
+
+                  // Scale coordinates to match canvas dimensions
+                  const scaleX = canvas.width / video.videoWidth;
+                  const scaleY = canvas.height / video.videoHeight;
+
+                  const scaledX = x * scaleX;
+                  const scaledY = y * scaleY;
+                  const scaledW = w * scaleX;
+                  const scaledH = h * scaleY;
+
+                  console.log(
+                    `Scaled Face coordinates: x=${scaledX}, y=${scaledY}, w=${scaledW}, h=${scaledH}`
+                  ); // Debugging
+
+                  // Draw the green box
+                  context.strokeStyle = "green";
+                  context.lineWidth = 3;
+                  context.strokeRect(scaledX, scaledY, scaledW, scaledH);
+                }
+              } else if (data.error) {
+                emotionResult.innerText = `Error: ${data.error}`;
+                toastr.error(data.error);
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              toastr.error("An error occurred while detecting emotion.");
+            })
+            .finally(() => {
+              // Revert button text to "Capture & Detect" and enable the button
+              captureBtn.text("Capture & Detect");
+              captureBtn.prop("disabled", false);
+              // Reload the page after a 3-second delay
+              setTimeout(() => {
+                location.reload();
+              }, 3000); // 3000 milliseconds = 3 seconds
+            });
+        }, "image/jpeg");
+      });
+    </script>
+  </body>
+</html>

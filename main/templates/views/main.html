@@ -1,0 +1,167 @@
+{% load static %}
+{% include "base/base.html" %} 
+<body data-theme-mode-panel-active data-theme="light">
+  <div class="site-wrapper overflow-hidden ">
+    <div id="loading">
+      <img src="image/preloader.gif" alt="">
+    </div>
+    
+    <!-- Header Area -->
+   {% include "components/nav.html"%}
+    <!-- navbar- -->
+    <!--/ .Header Area -->
+    <!-- Hero Area -->
+    <div class="welcome-area welcome-area--l1 position-relative bg-default">
+      <div class="container">
+        <div class="row">
+          <!-- Welcome content Area -->
+          <div class="col-xl-6 col-lg-7 col-md-8 col-xs-11 order-2 order-lg-1" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+            <div class="welcome-content welcome-content--l1">
+              <h1 class="welcome-content__title">
+                Welcome to<br>
+                <span class="text-highlight highlight-text d-inline-block"></span>
+              </h1>
+              <p class="welcome-content__descriptions">Harness the Power of Machine Learning & Artificial Intelligence to Predict User's Mood<br class="d-none d-xs-block"></p>
+              <!-- Newsletter -->
+            
+             
+            </div>
+          </div>
+          <!--/ .Welcome Content Area -->
+          <!--Welcome Image Area -->
+          <div class="col-xl-6 col-lg-5 col-md-10 order-1 order-lg-2 position-static">
+            <div class="welcome-image-group-wrapper">
+              <div class="welcome-image welcome-image--group-01">
+                <img src="{% static 'image/faces/f5.jpg' %}" alt="" style='border-radius:12px 14px;' class="welcome-image__single welcome-image--group-01__main">
+                <div class="welcome-image__single welcome-image--group-01__img-1">
+                  <img class="w-100" src="{% static 'image/faces/f4.jpg' %}" style='border-radius:12px 14px;'  alt="">
+                </div>
+                <div class="welcome-image__single welcome-image--group-01__img-2">
+                  <img class="w-100" src="{% static 'image/faces/f6.jpg' %}" style='border-radius:12px 14px;' alt="">
+                </div>
+             
+                <div class="welcome-image__single welcome-image--group-01__img-4">
+                  <img class="w-100" src="{% static 'image/faces/f3.jpg' %}" alt="">
+                </div>
+                <div class="welcome-image__single welcome-image--group-01__img-5">
+                  <img class="w-100" src="{% static 'image/home-1/l1-hero-shape-1.png' %}" alt="">
+                </div>
+                <div class="welcome-image__single welcome-image--group-01__img-6">
+                  <img class="w-100" src="{% static 'image/home-1/l1-hero-shape-2.png' %}" alt="">
+                </div>
+                <div class="welcome-image__single welcome-image--group-01__img-7">
+                  <img class="w-100" src="{% static 'image/home-1/l1-hero-shape-3.png' %}" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/ .Welcome Image Area -->
+        </div>
+      </div>
+    </div>
+    <!--/ .Hero Area -->
+    <!-- Services Area -->
+    <div class="service-area service-area--l1 border-top border-default-color-2 bg-default">
+      <div class="service-shape service-shape--l1">
+        <img class="w-100" src="{% static 'image/home-1/services-shape-l1.png' %}" alt="">
+      </div>
+      <div class="container">
+        <!-- Section Title -->
+        <div class="row align-items-end justify-content-center">
+          <div class="col-lg-7 col-md-12 col-xs-10">
+            <div class="section-title text-center text-md-start" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+              <h2 class="section-title__heading">Face Emotion Prediction<br class="d-none d-xs-block d-lg-none d-xl-block"></h2>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-12 col-xs-10">
+            <div class="section-title  text-center text-md-start" data-aos="fade-left" data-aos-duration="500" data-aos-once="true">
+              <p class="section-title__description">In today’s volatile market, staying ahead of facial recognition trends is crucial. Our advanced facial emotion.  prediction platform leverages cutting-edge machine learning . <br class="d-none d-xs-block"> algorithms to provide precise and reliable predictions<br class="d-none d-sm-block"> </p>
+            </div>
+          </div>
+        </div>
+        <!--/ .Section Title -->
+        <div class="service-items">
+          <div class="row justify-content-center justify-content-md-start">
+            <!-- Single Service -->
+            <div class="col-lg-4 col-xs-6 col-10">
+              <div class="widget widget--service text-center text-md-start" data-aos="zoom-in" data-aos-duration="300" data-aos-once="true">
+                <div class="widget__icon widget__icon--golden-tainoi mx-auto mx-md-0">
+                  <img src="{% static 'image/svg/athletics.svg' %}" alt="">
+                </div>
+                <div class="widget__body">
+                  <h5 class="widget__heading">State-of-the-Art Technology</h5>
+                  <p class="widget__description">Our platform uses the latest machine learning techniques to analyze historical data, <br class="d-none d-md-block"> market trends, and a myriad of influencing factors, ensuring highly accurate price predictions.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-xs-6 col-10">
+              <div class="widget widget--service text-center text-md-start" data-aos="zoom-in" data-aos-duration="300" data-aos-once="true">
+                <div class="widget__icon widget__icon--ice-cold mx-auto mx-md-0">
+                  <img src="{% static 'image/svg/archery-target.svg' %}" alt="">
+                </div>
+                <div class="widget__body">
+                  <h5 class="widget__heading">Comprehensive Data Analysis</h5>
+                  <p class="widget__description">We aggregate data from multiple sources, including market reports, weather patterns, and socio-economic factors, <br class="d-none d-md-block"> to deliver a holistic view of the food market dynamics.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-xs-6 col-10">
+              <div class="widget widget--service text-center text-md-start" data-aos="zoom-in" data-aos-duration="300" data-aos-once="true">
+                <div class="widget__icon widget__icon--anakiwaap mx-auto mx-md-0">
+                  <img src="{% static 'image/svg/money-coins.svg' %}" alt="">
+                </div>
+                <div class="widget__body">
+                  <h5 class="widget__heading">User Friendly Interface</h5>
+                  <p class="widget__description">Our intuitive and easy-to-navigate interface allows users to access predictions effortlessly, whether you are a farmer, <br class="d-none d-md-block"> in touch
+                    retailer, or consumer looking to plan your purchases.</p>
+                </div>
+              </div>
+            </div>
+            <!--/ .Single Service -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ .Services Area -->
+    <!-- Feature Area -->
+    <div class="feature-section feature-section--l1 bg-blue-ribbon dark-mode-texts">
+      <!-- Section Shape -->
+      <div class="feature-section--l1__shape-group">
+        <img class="w-100" src="{% static 'image/home-1/l1-half-circle-shape.png' %}" alt="">
+        <div class="img-1">
+          <img class="w-100" src="{% static 'image/home-1/l1-full-circle-shape.png' %}" alt="">
+        </div>
+      </div>
+     
+    </div>
+    <!--/ .Feature Area -->
+    <!-- Content One Area -->
+   
+    <!--/ .Content One Area -->
+    <!-- Content Two Area -->
+   
+    <!--/ .Content Two Area -->
+    <!-- Testimonial Area -->
+    
+    <!--/ .Testimonial Area -->
+    <!-- Counter Area -->
+    
+    <!--/ .Counter Area -->
+    <!-- Footer Area -->
+    
+    
+    <!--/ .Footer Area -->
+    <script src="{% static 'plugins/type-js/typed.min.js' %}"></script>
+    <script>
+      var typed = new Typed('.highlight-text', {
+        strings: ["Facial Emotion .", "Prediction."],
+        typeSpeed: 80,
+        backSpeed: 80,
+        cursorChar: '',
+        shuffle: true,
+        smartBackspace: false,
+        loop: true
+      });
+    </script>
+  </div>
+  {% include "base/footer.html"%}
